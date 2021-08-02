@@ -1,0 +1,15 @@
+server:
+  port: 10000
+
+#    freemarker静态资源配置
+spring:
+  freemarker:
+    suffix: .ftlh
+    cache: false
+    charset: UTF-8
+    content-type: text/html
+    expose-request-attributes: true
+    expose-session-attributes: true
+    request-context-attribute: request
+netty:
+  port: 8564
