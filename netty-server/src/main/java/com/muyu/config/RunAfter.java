@@ -42,8 +42,7 @@ public class RunAfter implements ApplicationRunner {
      * 程序启动后 对netty服务器进行初始化
      */
     private void initNetty() {
-        long startTime = System.currentTimeMillis();
-        log.info("netty初始化开始：{}",startTime);
+        log.info("netty初始化开始");
         NettyServerInstance nettyServerInstance = new NettyServerInstance(this.nettyPort, this.nettyServerHandler);
         nettyServerInstance.init();
     }
