@@ -11,31 +11,29 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
-import io.netty.handler.timeout.IdleStateHandler;
-
-import java.net.InetSocketAddress;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author 牧鱼
- * @Classname NettyServer
+ * @Classname NettyClient
  * @Description TODO
  * @Date 2021/7/30
  */
-public class NettyClient {
+public class NettyClientInit {
 
-    private String host ;
+    private static final Logger log = LoggerFactory.getLogger(NettyClientInit.class);
 
-    private int port;
-
-    public NettyClient(String host, int port) {
-        this.host = host;
-        this.port = port;
+    public static void nettyInit(NettyClientBean nettyClientBean){
+        NettyClientInit nettyClientInit = new NettyClientInit();
+        nettyClientInit.init(nettyClientBean);
     }
+
     private NettyClientHandler mClientHandler;
 
     private ChannelFuture future;
 
-    public void init() {
+    private void init(NettyClientBean nettyClientBean) {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
             Bootstrap b = new Bootstrap();
@@ -59,9 +57,9 @@ public class NettyClient {
                             channel.pipeline().addLast(mClientHandler);
                         }
                     });
-            future = b.connect(host, port).sync();
+            future = b.connect(nettyClientBean.getHost(), nettyClientBean.getPort()).sync();
             if (future.isSuccess()) {
-                System.out.println("Client,链接服务端成功");
+                log.info("Client,链接服务端成功");
             }
             future.channel().closeFuture().sync();
         } catch (Exception e) {

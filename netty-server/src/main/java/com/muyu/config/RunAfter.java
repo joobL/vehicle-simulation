@@ -1,6 +1,6 @@
 package com.muyu.config;
 
-import com.muyu.netty.server.NettyInstance;
+import com.muyu.netty.server.NettyServerInstance;
 import com.muyu.netty.server.NettyServerHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,8 +44,8 @@ public class RunAfter implements ApplicationRunner {
     private void initNetty() {
         long startTime = System.currentTimeMillis();
         log.info("netty初始化开始：{}",startTime);
-        NettyInstance nettyInstance = new NettyInstance(this.nettyPort, this.nettyServerHandler);
-        nettyInstance.init();
+        NettyServerInstance nettyServerInstance = new NettyServerInstance(this.nettyPort, this.nettyServerHandler);
+        nettyServerInstance.init();
     }
 
 }

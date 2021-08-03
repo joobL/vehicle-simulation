@@ -21,14 +21,14 @@ import org.slf4j.LoggerFactory;
  * @Description TODO
  * @Date 2021/7/30
  */
-public class NettyInstance {
-    private static final Logger log = LoggerFactory.getLogger(NettyInstance.class);
+public class NettyServerInstance {
+    private static final Logger log = LoggerFactory.getLogger(NettyServerInstance.class);
 
     private int nettyPort;
 
     private NettyServerHandler nettyServerHandler;
 
-    public NettyInstance(int nettyPort , NettyServerHandler nettyServerHandler) {
+    public NettyServerInstance(int nettyPort , NettyServerHandler nettyServerHandler) {
         this.nettyPort = nettyPort;
         this.nettyServerHandler = nettyServerHandler;
     }
