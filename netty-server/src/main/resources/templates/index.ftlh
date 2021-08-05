@@ -82,56 +82,27 @@
                 <span class="label label-info" >V123456789123456</span>
             </div>
             <div class="vinDiv" style="width: 90%; padding: 0 15px;">
-                <p>Server,channelActive</p>
-                <p>Server,接收到客户端发来的消息:{</p>
-                <p>"VIN":"DIWF8698DIIW87"</p>
-                <p>}</p>
-                <p>Server,接收到客户端发来的消息:{</p>
-                <p>"VIN":"DIWF8698DIIW87"</p>
-                <p>}</p>
-                <p>Server,接收到客户端发来的消息:{</p>
+                <p>2021-08-03 19:51:33.815  INFO 163300 --- [ntLoopGroup-3-2] c.muyu.netty.server.NettyServerHandler   : Server,channelActive</p>
+                <p>2021-08-03 19:51:39.071  INFO 163300 --- [ntLoopGroup-3-2] c.muyu.netty.server.NettyServerHandler   : Server,接收到客户端发来的消息:close</p>
+                <p>2021-08-03 19:51:39.071  INFO 163300 --- [ntLoopGroup-3-2] c.muyu.netty.server.NettyServerHandler   : 与服务器断开连接</p>
+                <p>2021-08-03 19:51:39.072  INFO 163300 --- [ntLoopGroup-3-2] c.muyu.netty.server.NettyServerHandler   : Server,channelInactive</p>
+                <p>2021-08-03 19:51:42.272  INFO 163300 --- [ntLoopGroup-3-3] c.muyu.netty.server.NettyServerHandler   : Server,channelActive</p>
+                <p>2021-08-03 19:51:44.328  INFO 163300 --- [ntLoopGroup-3-3] c.muyu.netty.server.NettyServerHandler   : Server,接收到客户端发来的消息:{</p>
                 <p>"VIN":"1232341412"</p>
                 <p>}</p>
-                <p>Server,channelActive</p>
-                <p>Server,接收到客户端发来的消息:{</p>
-                <p>"VIN":"DIWF8698DIIW87"</p>
-                <p>}</p>
-                <p>Server,接收到客户端发来的消息:{</p>
-                <p>"VIN":"DIWF8698DIIW87"</p>
-                <p>}</p>
-                <p>Server,接收到客户端发来的消息:{</p>
+                <p>2021-08-03 19:51:44.901  INFO 163300 --- [ntLoopGroup-3-3] c.muyu.netty.server.NettyServerHandler   : Server,接收到客户端发来的消息:{</p>
                 <p>"VIN":"1232341412"</p>
                 <p>}</p>
-                <p>Server,channelActive</p>
-                <p>Server,接收到客户端发来的消息:{</p>
-                <p>"VIN":"DIWF8698DIIW87"</p>
-                <p>}</p>
-                <p>Server,接收到客户端发来的消息:{</p>
-                <p>"VIN":"DIWF8698DIIW87"</p>
-                <p>}</p>
-                <p>Server,接收到客户端发来的消息:{</p>
+                <p>2021-08-03 19:51:45.458  INFO 163300 --- [ntLoopGroup-3-3] c.muyu.netty.server.NettyServerHandler   : Server,接收到客户端发来的消息:{</p>
                 <p>"VIN":"1232341412"</p>
                 <p>}</p>
-                <p>Server,channelActive</p>
-                <p>Server,接收到客户端发来的消息:{</p>
-                <p>"VIN":"DIWF8698DIIW87"</p>
-                <p>}</p>
-                <p>Server,接收到客户端发来的消息:{</p>
-                <p>"VIN":"DIWF8698DIIW87"</p>
-                <p>}</p>
-                <p>Server,接收到客户端发来的消息:{</p>
+                <p>2021-08-03 19:51:45.907  INFO 163300 --- [ntLoopGroup-3-3] c.muyu.netty.server.NettyServerHandler   : Server,接收到客户端发来的消息:{</p>
                 <p>"VIN":"1232341412"</p>
                 <p>}</p>
-                <p>Server,channelActive</p>
-                <p>Server,接收到客户端发来的消息:{</p>
-                <p>"VIN":"DIWF8698DIIW87"</p>
-                <p>}</p>
-                <p>Server,接收到客户端发来的消息:{</p>
-                <p>"VIN":"DIWF8698DIIW87"</p>
-                <p>}</p>
-                <p>Server,接收到客户端发来的消息:{</p>
-                <p>"VIN":"1232341412"</p>
-                <p>}</p>
+                <p>2021-08-03 19:51:51.645  INFO 163300 --- [ntLoopGroup-3-3] c.muyu.netty.server.NettyServerHandler   : Server,接收到客户端发来的消息:close</p>
+                <p>2021-08-03 19:51:51.646  INFO 163300 --- [ntLoopGroup-3-3] c.muyu.netty.server.NettyServerHandler   : 与服务器断开连接</p>
+                <p>2021-08-03 19:51:51.647  INFO 163300 --- [ntLoopGroup-3-3] c.muyu.netty.server.NettyServerHandler   : Server,channelInactive</p>
+
             </div>
         </div>
     </div>

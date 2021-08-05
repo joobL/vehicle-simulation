@@ -31,7 +31,7 @@ public class RunAfter implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         long startTime = System.currentTimeMillis();
-        log.info("服务器资源初始化开始：{}",startTime);
+        log.info("服务器资源初始化开始");
         new Thread(() -> {
             initNetty();
         },"netty工作线程").start();

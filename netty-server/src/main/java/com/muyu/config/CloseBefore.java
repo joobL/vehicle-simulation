@@ -19,7 +19,7 @@ public class CloseBefore implements DisposableBean {
     @Override
     public void destroy() throws Exception {
         long startTime = System.currentTimeMillis();
-        log.info("服务器资源销毁开始：{}",startTime);
+        log.info("服务器资源销毁开始");
         destroyNettyServer();
         log.info("服务器资源销毁结束耗时：{}",(System.currentTimeMillis() - startTime));
     }
