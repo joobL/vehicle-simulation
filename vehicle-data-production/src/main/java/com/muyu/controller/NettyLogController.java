@@ -1,8 +1,7 @@
 package com.muyu.controller;
 
 import com.muyu.common.Response;
-import com.muyu.netty.log.NettyLogQueue;
-import com.muyu.pojo.VehicleData;
+import com.muyu.netty.log.NettyClientLogQueue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +18,7 @@ public class NettyLogController {
 
     @GetMapping
     public Response<String> getLog(){
-        return Response.success(NettyLogQueue.get());
+        return Response.success(NettyClientLogQueue.get());
     }
 
 }

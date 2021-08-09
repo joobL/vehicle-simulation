@@ -12,7 +12,7 @@
     <modules>
         <module>netty-server</module>
         <module>vehicle-data-production</module>
-        <module>netty-common</module>
+        <module>vehicle-common</module>
         <module>vehicle-data-parsing</module>
     </modules>
 

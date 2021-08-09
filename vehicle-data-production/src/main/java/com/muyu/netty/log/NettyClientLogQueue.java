@@ -8,7 +8,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @Description netty 发送消息队列
  * @Date 2021/8/5
  */
-public class NettyLogQueue {
+public class NettyClientLogQueue {
     private static LinkedBlockingQueue<String> nettyLogQueue = new LinkedBlockingQueue<String>();
 
     /**

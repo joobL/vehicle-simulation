@@ -5,7 +5,7 @@ import com.muyu.common.Config;
 import com.muyu.common.Response;
 import com.muyu.netty.bean.NettyClientBean;
 import com.muyu.netty.client.NettyClientInit;
-import com.muyu.netty.log.NettyLogQueue;
+import com.muyu.netty.log.NettyClientLogQueue;
 import com.muyu.netty.operate.NettyClientMsg;
 import com.muyu.pojo.VehicleData;
 import org.apache.commons.lang3.StringUtils;
@@ -45,7 +45,7 @@ public class NettyClientController {
             return Response.error("未与netty服务器建立连接");
         }
         NettyClientMsg.sendMsg(JSONObject.toJSONString(vehicleData));
-        NettyLogQueue.add(vehicleData.getVehicleMsgLog());
+        NettyClientLogQueue.add(vehicleData.getVehicleMsgLog());
         return Response.success();
     }
 
