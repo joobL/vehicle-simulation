@@ -57,7 +57,7 @@ public class NettyServerInstance {
                     @Override
                     protected void initChannel(SocketChannel channel) throws Exception {
                     // 分包器
-                    channel.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, Unpooled.copiedBuffer(Config.DATA_PACK_SEPARATOR.getBytes())));
+                    channel.pipeline().addLast(new DelimiterBasedFrameDecoder(4096, Unpooled.copiedBuffer(Config.DATA_PACK_SEPARATOR.getBytes())));
 
                     // 编码器 发送的时候进行编码 -- 默认UTF-8
                     channel.pipeline().addLast("encoder", new StringEncoder());

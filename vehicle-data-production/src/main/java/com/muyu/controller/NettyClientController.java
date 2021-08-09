@@ -1,15 +1,15 @@
 package com.muyu.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.muyu.common.Config;
 import com.muyu.common.Response;
-import com.muyu.netty.client.NettyClientBean;
+import com.muyu.netty.bean.NettyClientBean;
 import com.muyu.netty.client.NettyClientInit;
-import com.muyu.netty.client.NettyClientMsg;
+import com.muyu.netty.log.NettyLogQueue;
+import com.muyu.netty.operate.NettyClientMsg;
+import com.muyu.pojo.VehicleData;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author 牧鱼
@@ -23,6 +23,7 @@ public class NettyClientController {
 
     @PostMapping("/initNettyClient")
     public Response initNettyClient(@RequestBody NettyClientBean nettyClientBean){
+
         if (StringUtils.isEmpty(nettyClientBean.getHost())){
             return Response.error("请输入IP地址");
         }
@@ -39,11 +40,12 @@ public class NettyClientController {
     }
 
     @PostMapping("/nettySendMsg")
-    public Response sendNettyMsg(@RequestBody String msg){
+    public Response sendNettyMsg(@RequestBody VehicleData vehicleData){
         if (Config.ctx == null){
             return Response.error("未与netty服务器建立连接");
         }
-        NettyClientMsg.sendMsg(msg);
+        NettyClientMsg.sendMsg(JSONObject.toJSONString(vehicleData));
+        NettyLogQueue.add(vehicleData.getVehicleMsgLog());
         return Response.success();
     }
 

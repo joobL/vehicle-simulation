@@ -95,3 +95,15 @@ modal_status = {
     FAIL: "error",
     WARNING: "warning"
 };
+
+function getFormToMap(formId){
+    var vehiceleForm = $("#"+formId).serialize();
+    var arrs =vehiceleForm.split("&");
+    var paramJson = {};
+    for (var i in arrs){
+        var arr = arrs[i];
+        var arrSplit = arr.split("=");
+        paramJson[arrSplit[0]] = arrSplit.length > 1 ? arrSplit[1] : "";
+    }
+    return paramJson;
+}

@@ -57,46 +57,58 @@
 <div style="margin-right: 10px; margin-left: 10px;">
     <div class="col-md-12 divCss divBorderHeight">
         <div class="col-md-5 divCss divBorderHeight">
-            <form class="form-inline">
+            <div class="form-inline">
                 <div class="form-group">
                     <label for="host">地址</label>
-                    <input type="text" class="form-control" id="host" placeholder="IP地址" value="127.0.0.1">
+                    <input type="text" class="form-control" name="" id="host" placeholder="IP地址" value="127.0.0.1">
                 </div>
                 <div class="form-group">
                     <label for="port">端口</label>
-                    <input type="text" class="form-control" id="port" placeholder="端口" value="8564">
+                    <input type="text" class="form-control" name="" id="port" placeholder="端口" value="8564">
                 </div>
                 <button type="button" class="btn btn-sm btn-default" onclick="connect()">连接</button>
                 <button type="button" class="btn btn-sm btn-danger" onclick="disConnect()">关闭</button>
                 <span id="connect" class="label label-success" style="display: none">已连接</span>
                 <span id="disconnect" class="label label-danger">已断开</span>
-            </form>
+            </div>
         </div>
+        <div class="col-md-1 divCss divBorderHeight" style="padding: 0">
+            <div class="col-md-4">
+                <button type="button" class="btn btn-sm btn-default" onclick="startNettySendMsg()">上报</button>
+            </div>
+            <div class="col-md-4">
+                <button type="button" class="btn btn-sm btn-default" onclick="stopNettyStopMsg()">停止</button>
+            </div>
+        </div>
+
         <div class="col-md-2 divCss divBorderHeight" style="padding: 7px 0">
             <span class="col-md-7">当累计上报数据量：</span>
             <span class="label label-info" id="sendSum">12312</span>
+            <span id="send" class="label label-success" style="display: none">上报中</span>
+            <span id="disSend" class="label label-danger">未上报</span>
         </div>
     </div>
+    <form id="vehicleForm">
     <div class="col-md-12 divCss divBorderHeight" style="height: 875px;">
         <h4>上报数据模拟</h4>
         <hr style="margin-top: 10px; margin-bottom: 10px; border-top: 2px solid #080808;">
         <div class="col-md-12">
             <div class="vinDiv" style="border-right: #0673b3 2px solid; width: 15%;">
-                <form class="col-sm-12">
+                <div class="col-sm-12">
                     <div class="form-group">
                         <label for="vin">VIN</label>
-                        <input type="text" class="form-control" id="vin" placeholder="VIN">
+                        <input type="text" class="form-control" name="vin" id="vin" placeholder="VIN">
                     </div>
                     <div class="form-group">
                         <label for="drivingRoute">选择路线</label>
-                        <select type="text" class="form-control" id="drivingRoute">
+                        <select type="text" class="form-control" name="drivingRoute" id="drivingRoute">
                             <option value="-">请选择行驶路线</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="speed">车速</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="speed" placeholder="车速">
+                            <input type="text" class="form-control" name="speed" id="speed" placeholder="车速">
                             <div class="input-group-addon">KM/H</div>
                         </div>
                     </div>
@@ -104,7 +116,7 @@
                         <label for="mileage">里程</label>
 
                         <div class="input-group">
-                            <input type="text" class="form-control" id="mileage" placeholder="里程">
+                            <input type="text" class="form-control" name="mileage" id="mileage" placeholder="里程">
                             <div class="input-group-addon">KM</div>
                         </div>
                     </div>
@@ -112,21 +124,21 @@
                         <label for="voltage">总电压</label>
 
                         <div class="input-group">
-                            <input type="text" class="form-control" id="voltage" placeholder="总电压">
+                            <input type="text" class="form-control" name="voltage" id="voltage" placeholder="总电压">
                             <div class="input-group-addon">V</div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="current">总电流</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="current" placeholder="总电流">
+                            <input type="text" class="form-control" name="current" id="current" placeholder="总电流">
                             <div class="input-group-addon">A</div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="resistance">绝缘电阻</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="resistance" placeholder="绝缘电阻">
+                            <input type="text" class="form-control" name="resistance" id="resistance" placeholder="绝缘电阻">
                             <div class="input-group-addon">Ω</div>
                         </div>
                     </div>
@@ -142,123 +154,123 @@
                     </div>
                     <div class="form-group">
                         <label for="accelerationPedal">加速踏板行程值</label>
-                        <input type="text" class="form-control" id="accelerationPedal" placeholder="加速踏板行程值">
+                        <input type="text" class="form-control" name="accelerationPedal" id="accelerationPedal" placeholder="加速踏板行程值">
                     </div>
                     <div class="form-group">
                         <label for="brakePedal">制动踏板行程值</label>
-                        <input type="text" class="form-control" id="brakePedal" placeholder="制动踏板行程值">
+                        <input type="text" class="form-control" name="brakePedal" id="brakePedal" placeholder="制动踏板行程值">
                     </div>
                     <div class="form-group">
                         <label for="fuelConsumptionRate">燃料消耗率</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="fuelConsumptionRate" placeholder="燃料消耗率">
+                            <input type="text" class="form-control" name="fuelConsumptionRate" id="fuelConsumptionRate" placeholder="燃料消耗率">
                             <div class="input-group-addon">L/百公里</div>
                         </div>
                     </div>
 
-                </form>
+                </div>
             </div>
 
             <div class="vinDiv" style="border-right: #0673b3 2px solid; width: 15%;">
-                <form class="col-sm-12">
+                <div class="col-sm-12">
                     <div class="form-group">
                         <label for="motorControllerTemperature">电机控制器温度</label>
-                        <input type="text" class="form-control" id="motorControllerTemperature" placeholder="电机控制器温度">
+                        <input type="text" class="form-control" name="motorControllerTemperature" id="motorControllerTemperature" placeholder="电机控制器温度">
                     </div>
                     <div class="form-group">
                         <label for="motorSpeed">电机转速</label>
-                        <input type="text" class="form-control" id="motorSpeed" placeholder="电机转速">
+                        <input type="text" class="form-control" name="motorSpeed" id="motorSpeed" placeholder="电机转速">
                     </div>
                     <div class="form-group">
                         <label for="motorTorque">电机转矩</label>
-                        <input type="text" class="form-control" id="motorTorque" placeholder="电机转矩">
+                        <input type="text" class="form-control" name="motorTorque" id="motorTorque" placeholder="电机转矩">
                     </div>
                     <div class="form-group">
                         <label for="motorTemperature">电机温度</label>
-                        <input type="text" class="form-control" id="motorTemperature" placeholder="电机温度">
+                        <input type="text" class="form-control" name="motorTemperature" id="motorTemperature" placeholder="电机温度">
                     </div>
                     <div class="form-group">
                         <label for="motorVoltage">电机电压</label>
-                        <input type="text" class="form-control" id="motorVoltage" placeholder="电机电压">
+                        <input type="text" class="form-control" name="motorVoltage" id="motorVoltage" placeholder="电机电压">
                     </div>
                     <div class="form-group">
                         <label for="motorCurrent">电机电流</label>
-                        <input type="text" class="form-control" id="motorCurrent" placeholder="电机电流">
+                        <input type="text" class="form-control" name="motorCurrent" id="motorCurrent" placeholder="电机电流">
                     </div>
-                </form>
+                </div>
             </div>
             <div class="vinDiv" style="border-right: #0673b3 2px solid; width: 15%;">
-                <form class="col-sm-12">
+                <div class="col-sm-12">
                     <div class="form-group">
                         <label for="remainingBattery">动力电池剩余电量SOC</label>
 
                         <div class="input-group">
-                            <input type="text" class="form-control" id="remainingBattery" placeholder="动力电池剩余电量SOC">
+                            <input type="text" class="form-control" name="remainingBattery" id="remainingBattery" placeholder="动力电池剩余电量SOC">
                             <div class="input-group-addon">%</div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="maximumFeedbackPower">当前状态允许的最大反馈功率</label>
-                        <input type="text" class="form-control" id="maximumFeedbackPower" placeholder="当前状态允许的最大反馈功率">
+                        <input type="text" class="form-control" name="maximumFeedbackPower" id="maximumFeedbackPower" placeholder="当前状态允许的最大反馈功率">
                     </div>
                     <div class="form-group">
                         <label for="maximumDischargePower">当前状态允许最大放电功率</label>
-                        <input type="text" class="form-control" id="maximumDischargePower" placeholder="当前状态允许最大放电功率">
+                        <input type="text" class="form-control" name="maximumDischargePower" id="maximumDischargePower" placeholder="当前状态允许最大放电功率">
                     </div>
                     <div class="form-group">
                         <label for="selfCheckCounter">BMS自检计数器</label>
-                        <input type="text" class="form-control" id="selfCheckCounter" placeholder="BMS自检计数器">
+                        <input type="text" class="form-control" name="selfCheckCounter" id="selfCheckCounter" placeholder="BMS自检计数器">
                     </div>
                     <div class="form-group">
                         <label for="totalBatteryCurrent">动力电池充放电电流</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="totalBatteryCurrent" placeholder="动力电池充放电电流">
+                            <input type="text" class="form-control" name="totalBatteryCurrent" id="totalBatteryCurrent" placeholder="动力电池充放电电流">
                             <div class="input-group-addon">A</div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="totalBatteryVoltage">动力电池负载端总电压V3</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="totalBatteryVoltage" placeholder="动力电池负载端总电压V3">
+                            <input type="text" class="form-control" name="totalBatteryVoltage" id="totalBatteryVoltage" placeholder="动力电池负载端总电压V3">
                             <div class="input-group-addon">V</div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="singleBatteryMaxVoltage">单次最大电压</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="singleBatteryMaxVoltage" placeholder="单次最大电压">
+                            <input type="text" class="form-control" name="singleBatteryMaxVoltage" id="singleBatteryMaxVoltage" placeholder="单次最大电压">
                             <div class="input-group-addon">V</div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="singleBatteryMinVoltage">单体电池最低电压</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="singleBatteryMinVoltage" placeholder="单体电池最低电压">
+                            <input type="text" class="form-control" name="singleBatteryMinVoltage" id="singleBatteryMinVoltage" placeholder="单体电池最低电压">
                             <div class="input-group-addon">V</div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="singleBatteryMaxTemperature">单体电池最高温度</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="singleBatteryMaxTemperature" placeholder="单体电池最高温度">
+                            <input type="text" class="form-control" name="singleBatteryMaxTemperature" id="singleBatteryMaxTemperature" placeholder="单体电池最高温度">
                             <div class="input-group-addon">℃</div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="singleBatteryMinTemperature">单体电池最低温度</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="singleBatteryMinTemperature" placeholder="单体电池最低温度">
+                            <input type="text" class="form-control" name="singleBatteryMinTemperature" id="singleBatteryMinTemperature" placeholder="单体电池最低温度">
                             <div class="input-group-addon">℃</div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="availableBatteryCapacity">动力电池可用容量</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="availableBatteryCapacity" placeholder="动力电池可用容量">
+                            <input type="text" class="form-control" name="availableBatteryCapacity" id="availableBatteryCapacity" placeholder="动力电池可用容量">
                             <div class="input-group-addon">%</div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
             <div class="vinDiv" style="border-right: #0673b3 2px solid; width: 55%;">
                 <div class="vinDiv message" style="height: 495px;">
@@ -497,16 +509,18 @@
 
                     </div>
                 </div>
-                <div class="vinDiv" style="height :325px ;width: 100%; padding: 0 15px;">
+                <div class="vinDiv" id="vehicleMsgLog" style="height :325px ;width: 100%; padding: 0 15px;">
 
                 </div>
             </div>
         </div>
     </div>
+    </form>
 </div>
 </body>
 <script>
-
+    var nettyLogTime = null;
+    var nettyMsgTime = null;
     /**
      * 连接服务器
      */
@@ -534,7 +548,6 @@
         })
     }
 
-
     function connectEnd() {
         $("#connect").css("display","");
         $("#disconnect").css("display","none");
@@ -552,6 +565,42 @@
                 disconnect();
             }
         })
+        startNettyLog();
     })
+    function addLog(msg){
+        $("#vehicleMsgLog").append(msg);
+    }
+    function startNettySendMsg(){
+        nettyMsgTime = setInterval("sendNettySendMsg()", 1000);
+    }
+    function stopNettyStopMsg(){
+        clearInterval(nettyMsgTime);
+        nettyMsgTime = null;
+    }
+    function sendNettySendMsg(){
+        $.muyuSend.post("/nettyClient/nettySendMsg",getFormToMap("vehicleForm"),function (response) {
+            if (response.code != 100){
+                $.modal.msgWarning(response.msg);
+                stopNettyStopMsg();
+            }
+        })
+    }
+
+    function startNettyLog(){
+        nettyLogTime = setInterval("getNettyLog()", 1000);
+    }
+    function stopNettyLog(){
+        clearInterval(nettyLogTime);
+        nettyLogTime = null;
+    }
+    function getNettyLog(){
+        $.muyuSend.get("/netty/log",undefined,function (response) {
+            if (response.code == 100){
+                addLog(response.msg);
+            }else {
+                $.modal.msgWarning(response.msg);
+            }
+        })
+    }
 </script>
 </html>

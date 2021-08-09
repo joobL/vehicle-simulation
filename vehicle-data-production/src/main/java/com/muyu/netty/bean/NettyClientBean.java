@@ -1,4 +1,4 @@
-package com.muyu.netty.client;
+package com.muyu.netty.bean;
 
 /**
  * @author 牧鱼

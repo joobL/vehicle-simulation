@@ -2,6 +2,7 @@ package com.muyu.netty.client;
 
 
 import com.muyu.common.Config;
+import com.muyu.netty.bean.NettyClientBean;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
