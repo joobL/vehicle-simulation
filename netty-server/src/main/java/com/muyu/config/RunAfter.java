@@ -1,7 +1,7 @@
 package com.muyu.config;
 
-import com.muyu.netty.server.NettyServerInstance;
-import com.muyu.netty.server.NettyServerHandler;
+import com.muyu.netty.NettyServerInstance;
+import com.muyu.netty.NettyServerHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

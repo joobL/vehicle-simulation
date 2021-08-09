@@ -1,4 +1,4 @@
-package com.muyu.netty.server;
+package com.muyu.netty;
 
 import com.muyu.common.Config;
 import com.muyu.config.NettyConfig;

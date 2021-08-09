@@ -1,6 +1,8 @@
-package com.muyu.netty.server;
+package com.muyu.netty;
 
 import com.muyu.common.Config;
+import com.muyu.kafka.KafkaService;
+import com.muyu.utils.SpringUtils;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -19,6 +21,12 @@ import org.springframework.stereotype.Component;
 public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
 	private static final Logger log = LoggerFactory.getLogger(NettyServerHandler.class);
+
+	private KafkaService kafkaService;
+	public NettyServerHandler() {
+		kafkaService = SpringUtils.getBean(KafkaService.class);
+	}
+
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
 		log.info("Server,channelActive");
@@ -31,6 +39,8 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 		if ("close".equals(msg)){
 			log.info("与服务器断开连接");
 			ctx.writeAndFlush("断开"+ Config.DATA_PACK_SEPARATOR);
+		}else {
+			kafkaService.kafkaSendMsg(String.valueOf(msg));
 		}
 	}
 
