@@ -2,6 +2,7 @@ package com.muyu.netty;
 
 import com.muyu.common.Config;
 import com.muyu.kafka.KafkaService;
+import com.muyu.log.VehicleLog;
 import com.muyu.utils.SpringUtils;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -29,18 +30,42 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
-		log.info("Server,channelActive");
+		log.info("接到客户端连接》》》》》");
 		ctx.writeAndFlush("你好客户端" + Config.DATA_PACK_SEPARATOR);
 	}
 
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-		log.info("Server,接收到客户端发来的消息:" + msg);
-		if ("close".equals(msg)){
+		String strMsg = String.valueOf(msg);
+		log.info("Server,接收到客户端发来的消息:" + strMsg);
+		// 是否是断开消息报文
+		if (Config.CLOSE.equals(strMsg)){
 			log.info("与服务器断开连接");
 			ctx.writeAndFlush("断开"+ Config.DATA_PACK_SEPARATOR);
 		}else {
-			kafkaService.kafkaSendMsg(String.valueOf(msg));
+			// 是否是车辆上报数据
+			if (strMsg.indexOf(Config.VEHICLE_MSG_SUF) > -1){
+				strMsg = strMsg.replace(Config.VEHICLE_MSG_SUF , "");
+				String vin = strMsg.substring(0, 17);
+				// 判断是否是VIN
+				if (vin.matches(Config.VIN_REGEX)){
+					strMsg = strMsg.substring(17);
+					// 向kafka中发送消息
+					kafkaService.kafkaSendMsg(strMsg);
+					VehicleLog.vinAddLog(vin,strMsg);
+				}
+			}
+			// 车辆启动报文
+			else if (strMsg.indexOf(Config.VEHICLE_START_SUF) > -1){
+				strMsg = strMsg.replace(Config.VEHICLE_START_SUF , "");
+				VehicleLog.vinOnLine(strMsg);
+			}
+			// 车辆关闭报文
+			else if (strMsg.indexOf(Config.VEHICLE_STOP_SUF) > -1){
+				strMsg = strMsg.replace(Config.VEHICLE_STOP_SUF , "");
+				VehicleLog.vinOffLine(strMsg);
+			}
+
 		}
 	}
 

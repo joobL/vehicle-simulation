@@ -97,7 +97,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label for="vin">VIN</label>
-                        <input type="text" class="form-control" name="vin" id="vin" placeholder="VIN">
+                        <input type="text" class="form-control" name="vin" id="vin" placeholder="VIN" maxlength="17">
                     </div>
                     <div class="form-group">
                         <label for="drivingRoute">选择路线</label>

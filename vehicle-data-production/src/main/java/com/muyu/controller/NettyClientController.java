@@ -44,7 +44,7 @@ public class NettyClientController {
         if (Config.ctx == null){
             return Response.error("未与netty服务器建立连接");
         }
-        NettyClientMsg.sendMsg(JSONObject.toJSONString(vehicleData));
+        NettyClientMsg.sendMsg(Config.VEHICLE_MSG_SUF + vehicleData.getVin() +JSONObject.toJSONString(vehicleData));
         NettyClientLogQueue.add(vehicleData.getVehicleMsgLog());
         return Response.success();
     }

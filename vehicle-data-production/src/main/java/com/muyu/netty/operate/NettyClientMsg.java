@@ -30,7 +30,7 @@ public class NettyClientMsg {
      */
     public static void destroy(){
         log.info("客户端断开连接");
-        Config.ctx.writeAndFlush("close"+ Config.DATA_PACK_SEPARATOR);
+        Config.ctx.writeAndFlush(Config.CLOSE + Config.DATA_PACK_SEPARATOR);
         Config.ctx = null;
     }
 

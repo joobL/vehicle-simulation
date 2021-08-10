@@ -1,5 +1,7 @@
 package com.muyu.pojo;
 
+import com.muyu.utils.DateUtils;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -286,65 +288,14 @@ public class VehicleData {
     }
 
     public String getVehicleMsgLog(){
-        Date date = new Date();
-        var sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         StringBuilder vehicleLog = new StringBuilder("<p>");
-        vehicleLog.append(sdf.format(date)).append("&nbsp;&nbsp;&nbsp;");
+        vehicleLog.append(DateUtils.getNow()).append("&nbsp;&nbsp;&nbsp;");
         vehicleLog.append("车辆状态报文：[").append(getVehicleStatusMsg()).append("]    ");
         vehicleLog.append("智能硬件报文：[").append(getSmartHardwareMsg()).append("]    ");
         vehicleLog.append("电池状态报文：[").append(getBatteryMsg()).append("]");
         vehicleLog.append("</p>");
         return vehicleLog.toString();
     }
-
-    String s = "VehicleData{" +
-            "vin='" + vin + '\'' +
-            ", drivingRoute='" + drivingRoute + '\'' +
-            ", speed='" + speed + '\'' +
-            ", mileage='" + mileage + '\'' +
-            ", voltage='" + voltage + '\'' +
-            ", current='" + current + '\'' +
-            ", resistance='" + resistance + '\'' +
-            ", gear='" + gear + '\'' +
-            ", accelerationPedal='" + accelerationPedal + '\'' +
-            ", brakePedal='" + brakePedal + '\'' +
-            ", fuelConsumptionRate='" + fuelConsumptionRate + '\'' +
-            ", motorControllerTemperature='" + motorControllerTemperature + '\'' +
-            ", motorSpeed='" + motorSpeed + '\'' +
-            ", motorTorque='" + motorTorque + '\'' +
-            ", motorTemperature='" + motorTemperature + '\'' +
-            ", motorVoltage='" + motorVoltage + '\'' +
-            ", motorCurrent='" + motorCurrent + '\'' +
-            ", remainingBattery='" + remainingBattery + '\'' +
-            ", maximumFeedbackPower='" + maximumFeedbackPower + '\'' +
-            ", maximumDischargePower='" + maximumDischargePower + '\'' +
-            ", selfCheckCounter='" + selfCheckCounter + '\'' +
-            ", totalBatteryCurrent='" + totalBatteryCurrent + '\'' +
-            ", totalBatteryVoltage='" + totalBatteryVoltage + '\'' +
-            ", singleBatteryMaxVoltage='" + singleBatteryMaxVoltage + '\'' +
-            ", singleBatteryMinVoltage='" + singleBatteryMinVoltage + '\'' +
-            ", singleBatteryMaxTemperature='" + singleBatteryMaxTemperature + '\'' +
-            ", singleBatteryMinTemperature='" + singleBatteryMinTemperature + '\'' +
-            ", availableBatteryCapacity='" + availableBatteryCapacity + '\'' +
-            ", vehicleStatus=" + vehicleStatus +
-            ", chargingStatus=" + chargingStatus +
-            ", operatingStatus=" + operatingStatus +
-            ", socStatus=" + socStatus +
-            ", chargingEnergyStorageStatus=" + chargingEnergyStorageStatus +
-            ", driveMotorStatus=" + driveMotorStatus +
-            ", positionStatus=" + positionStatus +
-            ", easStatus=" + easStatus +
-            ", ptcStatus=" + ptcStatus +
-            ", epsStatus=" + epsStatus +
-            ", absStatus=" + absStatus +
-            ", mcuStatus=" + mcuStatus +
-            ", heatingStatus=" + heatingStatus +
-            ", batteryStatus=" + batteryStatus +
-            ", batteryInsulationStatus=" + batteryInsulationStatus +
-            ", dcdcStatus=" + dcdcStatus +
-            ", chgStatus=" + chgStatus +
-            '}';
-
 
     public String getVin() {
         return vin;
