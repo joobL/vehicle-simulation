@@ -31,7 +31,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
 		log.info("接到客户端连接》》》》》");
-		ctx.writeAndFlush("你好客户端" + Config.DATA_PACK_SEPARATOR);
+		ctx.writeAndFlush("连接已建立" + Config.DATA_PACK_SEPARATOR);
 	}
 
 	@Override

@@ -5,8 +5,11 @@
     <title>Netty监控台</title>
 </head>
 <link rel="stylesheet" href="/static/bootstrap-3.4.1/css/bootstrap.css"/>
+<link rel="stylesheet" href="/static/layer/mobile/need/layer.css">
 <script src="/static/vehicle/js/jquery.min.js"></script>
+<script src="/static/layer/layer.js"></script>
 <script src="/static/bootstrap-3.4.1/js/bootstrap.js"></script>
+<script src="/static/vehicle/js/muyu.js"></script>
 <body>
 <style>
     .divCss{
@@ -30,12 +33,6 @@
         -webkit-box-shadow:inset 0 0 5px rgba(0,0,0,0.2);
         border-radius:10px;
         background:#EDEDED;
-    }
-    .vinDiv span{
-        float: left;
-        margin: 5px 15px 5px 0;
-        font-size: 15px;
-        cursor:pointer;
     }
     .vinDiv{
         height: 750px;
@@ -78,30 +75,12 @@
         <h4>上报日志</h4>
         <hr style="margin-top: 10px; margin-bottom: 10px; border-top: 2px solid #080808;">
         <div class="col-md-12">
-            <div class="vinDiv" style="border-right: #0673b3 2px solid; width: 10%;">
-                <span class="label label-info" >V123456789123456</span>
+            <div id="vinDiv" class="vinDiv" style="border-right: #0673b3 2px solid; width: 12%;">
+                <#--<button class="btn btn-primary" onclick="clickVin(VIN123455679238)" type="button" style="padding: 0px;">
+                    V123456789123456 <span class="badge">在线</span>
+                </button>-->
             </div>
-            <div class="vinDiv" style="width: 90%; padding: 0 15px;">
-                <p>2021-08-03 19:51:33.815  INFO 163300 --- [ntLoopGroup-3-2] c.muyu.netty.server.NettyServerHandler   : Server,channelActive</p>
-                <p>2021-08-03 19:51:39.071  INFO 163300 --- [ntLoopGroup-3-2] c.muyu.netty.server.NettyServerHandler   : Server,接收到客户端发来的消息:close</p>
-                <p>2021-08-03 19:51:39.071  INFO 163300 --- [ntLoopGroup-3-2] c.muyu.netty.server.NettyServerHandler   : 与服务器断开连接</p>
-                <p>2021-08-03 19:51:39.072  INFO 163300 --- [ntLoopGroup-3-2] c.muyu.netty.server.NettyServerHandler   : Server,channelInactive</p>
-                <p>2021-08-03 19:51:42.272  INFO 163300 --- [ntLoopGroup-3-3] c.muyu.netty.server.NettyServerHandler   : Server,channelActive</p>
-                <p>2021-08-03 19:51:44.328  INFO 163300 --- [ntLoopGroup-3-3] c.muyu.netty.server.NettyServerHandler   : Server,接收到客户端发来的消息:{</p>
-                <p>"VIN":"1232341412"</p>
-                <p>}</p>
-                <p>2021-08-03 19:51:44.901  INFO 163300 --- [ntLoopGroup-3-3] c.muyu.netty.server.NettyServerHandler   : Server,接收到客户端发来的消息:{</p>
-                <p>"VIN":"1232341412"</p>
-                <p>}</p>
-                <p>2021-08-03 19:51:45.458  INFO 163300 --- [ntLoopGroup-3-3] c.muyu.netty.server.NettyServerHandler   : Server,接收到客户端发来的消息:{</p>
-                <p>"VIN":"1232341412"</p>
-                <p>}</p>
-                <p>2021-08-03 19:51:45.907  INFO 163300 --- [ntLoopGroup-3-3] c.muyu.netty.server.NettyServerHandler   : Server,接收到客户端发来的消息:{</p>
-                <p>"VIN":"1232341412"</p>
-                <p>}</p>
-                <p>2021-08-03 19:51:51.645  INFO 163300 --- [ntLoopGroup-3-3] c.muyu.netty.server.NettyServerHandler   : Server,接收到客户端发来的消息:close</p>
-                <p>2021-08-03 19:51:51.646  INFO 163300 --- [ntLoopGroup-3-3] c.muyu.netty.server.NettyServerHandler   : 与服务器断开连接</p>
-                <p>2021-08-03 19:51:51.647  INFO 163300 --- [ntLoopGroup-3-3] c.muyu.netty.server.NettyServerHandler   : Server,channelInactive</p>
+            <div id="vinLogDiv" class="vinDiv" style="width: 88%; padding: 0 15px;">
 
             </div>
         </div>
@@ -109,6 +88,65 @@
 </div>
 </body>
 <script>
+    var path = "/vehicle/log/";
+
+    var nettyVinTime = null;
+    var vinLog = null;
+    var vinLogTime = null;
+
+    $(function (){
+        nettyVinTime = setInterval("getVin()",1000)
+        vinLogTime = setInterval("getLogByVin()",1000)
+    })
+
+    function getLogByVin(){
+        if (vinLog != null){
+            $.muyuSend.get(path+vinLog,undefined,function (response) {
+                if (response.code == 100){
+                    $("#vinLogDiv").append(response.data);
+                }else {
+                    $.modal.msgWarning(response.msg);
+                }
+            })
+        }
+    }
+
+    /**
+     * 切换日志检测对象 并且清空日志
+     * */
+    function clickVin(vin){
+        vinLog = vin;
+        $("#vinLogDiv").empty();
+    }
+    /**
+     * 获取上报车辆VIN
+     * */
+    function getVin(){
+        $.muyuSend.get(path+"vin",undefined,function (response) {
+            if (response.code == 100){
+                $("#vinDiv").empty();
+                for (var vin in response.data){
+                    $("#vinDiv").append(vinSplicing(vin,response.data[vin]));
+                }
+            }else {
+                $.modal.msgWarning(response.msg);
+            }
+        })
+    }
+
+    /**
+     * 拼接VIN展示
+     * @param vin
+     * @param status
+     * @returns {string}
+     */
+    function vinSplicing(vin , status){
+        var vin =
+            '<button class="btn btn-primary" onclick="clickVin(\''+vin+'\')" type="button" style="padding: 0px;margin: 5px 0;">'+
+                vin+' <span class="badge">'+(status == 1 ? "在线" : "离线")+'</span>'+
+            '</button>';
+        return vin;
+    }
 
 </script>
 </html>

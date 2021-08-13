@@ -287,6 +287,18 @@ public class VehicleData {
         return batteryMsg;
     }
 
+    public String getNettyVehicleMsgLog(){
+        StringBuilder vehicleLog = new StringBuilder("<p>");
+        vehicleLog.append("车辆：").append(this.vin);
+        vehicleLog.append("上报数据：{").append("<br>上报时间：");
+        vehicleLog.append(DateUtils.getNow()).append("<br>车辆报文信息：");
+        vehicleLog.append("车辆状态：[").append(getVehicleStatusMsg()).append("]    ");
+        vehicleLog.append("智能硬件：[").append(getSmartHardwareMsg()).append("]    ");
+        vehicleLog.append("电池状态：[").append(getBatteryMsg()).append("]<br>");
+        vehicleLog.append("}</p> <hr style='border-top:3px solid #0071fd'>");
+        return vehicleLog.toString();
+    }
+
     public String getVehicleMsgLog(){
         StringBuilder vehicleLog = new StringBuilder("<p>");
         vehicleLog.append(DateUtils.getNow()).append("&nbsp;&nbsp;&nbsp;");

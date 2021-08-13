@@ -25,6 +25,16 @@ public class VehicleLog {
 
     private static Map<String, LinkedBlockingQueue<String>> vehicleVinLogQueue = new HashMap<>();
 
+    public static String getVehicleLog(String vin){
+        LinkedBlockingQueue<String> vehicleVinLog = getLogQueue(vin);
+        if (vehicleVinLog != null){
+            return vehicleVinLog.poll();
+        }else {
+            vinOnLine(vin);
+        }
+        return null;
+    }
+
     /**
      * 添加车辆日志 含有校验 推荐使用
      * @param vin
@@ -76,7 +86,7 @@ public class VehicleLog {
      */
     public static void addLog(String vin , String log){
         LinkedBlockingQueue<String> logQueue = getLogQueue(vin);
-        logQueue.add("<p>"+ DateUtils.getNow()+ "&npsp;&npsp;&npsp;&npsp;" +log+"</P>");
+        logQueue.add(log);
     }
 
 
