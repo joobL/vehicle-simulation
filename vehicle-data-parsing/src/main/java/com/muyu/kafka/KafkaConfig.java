@@ -28,7 +28,7 @@ public class KafkaConfig {
         props.put("enable.auto.commit", "true");
         props.put("auto.commit.interval.ms", "1000");
         props.put("session.timeout.ms", "30000");
-        props.put("max.poll.records", "1");
+        props.put("max.poll.records", "10");
         KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<>(props);
         //订阅名称为“one-more-topic”的Topic的消息
         kafkaConsumer.subscribe(Arrays.asList(Config.TOPIC));

@@ -4,6 +4,8 @@ import com.muyu.utils.DateUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author 牧鱼
@@ -718,5 +720,27 @@ public class VehicleData {
                 ", dcdcStatus=" + dcdcStatus +
                 ", chgStatus=" + chgStatus +
                 '}';
+    }
+
+    public Map<String, String> getBaseData() {
+        Map<String, String> dataBaseMap = new HashMap<>();
+        dataBaseMap.put("vin",vin);
+        dataBaseMap.put("drivingRoute",drivingRoute);
+        dataBaseMap.put("speed",speed);
+        dataBaseMap.put("mileage",mileage);
+        dataBaseMap.put("voltage",voltage);
+        dataBaseMap.put("current",current);
+        dataBaseMap.put("resistance",resistance);
+        dataBaseMap.put("gear",gear);
+        dataBaseMap.put("accelerationPedal",accelerationPedal);
+        dataBaseMap.put("brakePedal",brakePedal);
+        dataBaseMap.put("fuelConsumptionRate",fuelConsumptionRate);
+        dataBaseMap.put("motorControllerTemperature",motorControllerTemperature);
+        dataBaseMap.put("motorSpeed",motorSpeed);
+        dataBaseMap.put("motorTorque",motorTorque);
+        dataBaseMap.put("motorTemperature",motorTemperature);
+        dataBaseMap.put("motorVoltage",motorVoltage);
+        dataBaseMap.put("motorCurrent",motorCurrent);
+        return dataBaseMap;
     }
 }

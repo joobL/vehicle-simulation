@@ -3,5 +3,5 @@ server:
 hbase:
   conf:
     confMaps:
-      'hbase.zookeeper.quorum' : '139.196.121.76'
-      'hbase.zookeeper.property.clientPort' : '2182'
+      'hbase.zookeeper.quorum' : 'hbase'
+      'hbase.zookeeper.property.clientPort' : '2181'
