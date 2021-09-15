@@ -13,6 +13,8 @@ spring:
     request-context-attribute: request
   mvc:
     static-path-pattern: /static/**
-
+  redis:
+    host: 127.0.0.1
+    port: 6379
 netty:
   port: 8564

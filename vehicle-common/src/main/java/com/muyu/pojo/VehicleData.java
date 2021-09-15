@@ -24,6 +24,16 @@ public class VehicleData {
     private String drivingRoute;
 
     /**
+     * 经度
+     */
+    private String longitude;
+
+    /**
+     * 维度
+     */
+    private String latitude;
+
+    /**
      * 速度
      */
     private String speed;
@@ -292,8 +302,8 @@ public class VehicleData {
     public String getNettyVehicleMsgLog(){
         StringBuilder vehicleLog = new StringBuilder("<p>");
         vehicleLog.append("车辆：").append(this.vin);
-        vehicleLog.append("上报数据：{").append("<br>上报时间：");
-        vehicleLog.append(DateUtils.getNow()).append("<br>车辆报文信息：");
+        vehicleLog.append("上报数据：{").append("<br>上报时间：").append(DateUtils.getNow());
+        vehicleLog.append("    经度："+this.longitude+"，维度："+this.latitude).append("<br>车辆报文信息：");
         vehicleLog.append("车辆状态：[").append(getVehicleStatusMsg()).append("]    ");
         vehicleLog.append("智能硬件：[").append(getSmartHardwareMsg()).append("]    ");
         vehicleLog.append("电池状态：[").append(getBatteryMsg()).append("]<br>");
@@ -671,11 +681,29 @@ public class VehicleData {
         this.chgStatus = chgStatus;
     }
 
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
     @Override
     public String toString() {
         return "VehicleData{" +
                 "vin='" + vin + '\'' +
                 ", drivingRoute='" + drivingRoute + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", latitude='" + latitude + '\'' +
                 ", speed='" + speed + '\'' +
                 ", mileage='" + mileage + '\'' +
                 ", voltage='" + voltage + '\'' +
@@ -719,6 +747,9 @@ public class VehicleData {
                 ", batteryInsulationStatus=" + batteryInsulationStatus +
                 ", dcdcStatus=" + dcdcStatus +
                 ", chgStatus=" + chgStatus +
+                ", vehicleStatusMsg='" + vehicleStatusMsg + '\'' +
+                ", smartHardwareMsg='" + smartHardwareMsg + '\'' +
+                ", batteryMsg='" + batteryMsg + '\'' +
                 '}';
     }
 

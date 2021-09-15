@@ -33,7 +33,12 @@ public class LogController {
         if (vehicleLog == null){
             return Response.success();
         }
-        VehicleData vehicleData = JSONObject.parseObject(vehicleLog,VehicleData.class);
-        return Response.success("获取日志成功！",vehicleData.getNettyVehicleMsgLog());
+        try {
+            VehicleData vehicleData = JSONObject.parseObject(vehicleLog,VehicleData.class);
+            return Response.success("获取日志成功！",vehicleData.getNettyVehicleMsgLog());
+        }catch (Exception e){
+            return Response.success("获取日志成功！","<p>"+vehicleLog+"</p> <hr style='border-top:3px solid #0071fd'>");
+        }
+
     }
 }

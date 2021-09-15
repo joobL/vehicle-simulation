@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muyu.mapper.ImitatePositionMapper">
+
+    <select id="selectAll" resultType="com.muyu.pojo.ImitatePosition">
+        select * from imitate_position
+    </select>
+    <select id="selectPositionByPositId" resultType="java.lang.String">
+        select position from imitate_position where id = #{imitatePositionId}
+    </select>
+</mapper>

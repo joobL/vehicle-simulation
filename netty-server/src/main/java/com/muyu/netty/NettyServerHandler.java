@@ -9,6 +9,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 
@@ -24,8 +25,11 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 	private static final Logger log = LoggerFactory.getLogger(NettyServerHandler.class);
 
 	private KafkaService kafkaService;
-	public NettyServerHandler() {
-		kafkaService = SpringUtils.getBean(KafkaService.class);
+	private RedisTemplate<String,String> redisTemplate;
+
+	public NettyServerHandler(KafkaService kafkaService, RedisTemplate<String, String> redisTemplate) {
+		this.kafkaService = kafkaService;
+		this.redisTemplate = redisTemplate;
 	}
 
 	@Override
@@ -59,11 +63,15 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 			else if (strMsg.indexOf(Config.VEHICLE_START_SUF) > -1){
 				strMsg = strMsg.replace(Config.VEHICLE_START_SUF , "");
 				VehicleLog.vinOnLine(strMsg);
+				VehicleLog.vinAddLog(strMsg,"VIN为："+strMsg+"车辆上线");
+				redisTemplate.opsForList().leftPush(Config.VEHICLE_START_LINE,strMsg);
 			}
 			// 车辆关闭报文
 			else if (strMsg.indexOf(Config.VEHICLE_STOP_SUF) > -1){
 				strMsg = strMsg.replace(Config.VEHICLE_STOP_SUF , "");
+				VehicleLog.vinAddLog(strMsg,"VIN为："+strMsg+"车辆下线");
 				VehicleLog.vinOffLine(strMsg);
+				redisTemplate.opsForList().leftPush(Config.VEHICLE_STOP_LINE,strMsg);
 			}
 
 		}

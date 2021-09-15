@@ -12,4 +12,22 @@ spring:
     request-context-attribute: request
   mvc:
     static-path-pattern: /static/**
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3386/vehicle_data_production?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 127.0.0.1
+    port: 6379
 
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.muyu.pojo
+
+#showSql
+logging:
+  level:
+    com:
+      muyu:
+        mapper : debug
