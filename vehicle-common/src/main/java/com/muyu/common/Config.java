@@ -47,6 +47,11 @@ public class Config {
 	public final static String VEHICLE_STOP_SUF = "vehicle_stop:";
 
 	/**
+	 * 车辆是否需要报文通道
+	 */
+	public final static String VEHICLE_IS_MSG = "vehicle_msg_aisle";
+
+	/**
 	 * 车辆上线通道
 	 */
 	public final static String VEHICLE_START_LINE = "vehicle_start_aisle";

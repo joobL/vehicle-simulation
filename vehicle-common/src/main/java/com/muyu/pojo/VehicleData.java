@@ -1,5 +1,6 @@
 package com.muyu.pojo;
 
+import com.muyu.annotations.KeyAnn;
 import com.muyu.utils.DateUtils;
 
 import java.text.SimpleDateFormat;
@@ -41,126 +42,151 @@ public class VehicleData {
     /**
      * 里程
      */
+    @KeyAnn(key = "里程" , unit = "KM")
     private String mileage;
 
     /**
      * 总电压
      */
+    @KeyAnn(key = "总电压" , unit = "V")
     private String voltage;
 
     /**
      * 总电流
      */
+    @KeyAnn(key = "总电流" , unit = "A")
     private String current;
 
     /**
      * 绝缘电阻
      */
+    @KeyAnn(key = "绝缘电阻" , unit = "Ω")
     private String resistance;
 
     /**
      * 档位
      */
+    @KeyAnn(key = "档位" , unit = "")
     private String gear;
 
     /**
      * 加速踏板行程值
      */
+    @KeyAnn(key = "加速踏板行程值" , unit = "")
     private String accelerationPedal;
 
     /**
      * 制动踏板行程值
      */
+    @KeyAnn(key = "制动踏板行程值" , unit = "")
     private String brakePedal;
 
     /**
      * 燃料消耗率
      */
+    @KeyAnn(key = "燃料消耗率" , unit = "L/百公里")
     private String fuelConsumptionRate;
 
     /**
      * 电机控制器温度
      */
+    @KeyAnn(key = "电机控制器温度" , unit = "")
     private String motorControllerTemperature;
 
     /**
      * 电机转速
      */
+    @KeyAnn(key = "电机转速" , unit = "")
     private String motorSpeed;
 
     /**
      * 电机转矩
      */
+    @KeyAnn(key = "电机转矩" , unit = "")
     private String motorTorque;
 
     /**
      * 电机温度
      */
+    @KeyAnn(key = "电机温度" , unit = "")
     private String motorTemperature;
 
     /**
      * 电机电压
      */
+    @KeyAnn(key = "电机电压" , unit = "")
     private String motorVoltage;
 
     /**
      * 电机电流
      */
+    @KeyAnn(key = "电机电流" , unit = "")
     private String motorCurrent;
 
     /**
      * 动力电池剩余电量SOC
      */
+    @KeyAnn(key = "电池剩余电量" , unit = "")
     private String remainingBattery;
 
     /**
      * 当前状态允许的最大反馈功率
      */
+    @KeyAnn(key = "最大反馈功率" , unit = "")
     private String maximumFeedbackPower;
 
     /**
      * 当前状态允许最大放电功率
      */
+    @KeyAnn(key = "最大放电功率" , unit = "")
     private String maximumDischargePower;
 
     /**
      * BMS自检计数器
      */
+    @KeyAnn(key = "BMS自检计数器" , unit = "")
     private String selfCheckCounter;
 
     /**
      * 动力电池充放电电流
      */
+    @KeyAnn(key = "充放电电流" , unit = "")
     private String totalBatteryCurrent;
 
     /**
      * 动力电池负载端总电压V3
      */
+    @KeyAnn(key = "电池负载端总电压" , unit = "")
     private String totalBatteryVoltage;
 
     /**
      * 单次最大电压
      */
+    @KeyAnn(key = "单次最大电压" , unit = "")
     private String singleBatteryMaxVoltage;
 
     /**
      * 单体电池最低电压
      */
+    @KeyAnn(key = "单体电池最低电压" , unit = "")
     private String singleBatteryMinVoltage;
 
     /**
      * 单体电池最高温度
      */
+    @KeyAnn(key = "单体电池最高温度" , unit = "")
     private String singleBatteryMaxTemperature;
 
     /**
      * 单体电池最低温度
      */
+    @KeyAnn(key = "单体电池最低温度" , unit = "")
     private String singleBatteryMinTemperature;
 
     /**
      * 动力电池可用容量
      */
+    @KeyAnn(key = "动力电池可用容量" , unit = "%")
     private String availableBatteryCapacity;
 
     /**
