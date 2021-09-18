@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.muyu.common.Config;
 import com.muyu.hbase.service.HbaseDataService;
 import com.muyu.parsing.ParsingVehicleDataThread;
+import com.muyu.parsing.ParsingVehicleMsgThread;
 import com.muyu.pojo.VehicleData;
 import com.muyu.pool.ThreadPool;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -39,7 +40,9 @@ public class KafkaThread implements Runnable{
 
     @Override
     public void run() {
-        log.info("开始消费kafka消息");
+        if (System.currentTimeMillis() % 9 == 0){
+            log.info("消费kafka信息");
+        }
         ConsumerRecords<String, String> records = kafkaConsumer.poll(Duration.ofSeconds(1));
         for (ConsumerRecord<String, String> record : records.records(Config.TOPIC)) {
             String message = record.value();
@@ -53,11 +56,17 @@ public class KafkaThread implements Runnable{
             } catch (IOException e) {
                 e.printStackTrace();
             }finally {
-                /** 无论hbase是否可以成功，都需要去判断是否需要分流 */
+                /** 无论hbase是否可以成功，都需要去判断是否需要分流和报文解析 */
+                /**
+                 * 数据分流
+                 */
                 ThreadPool.exeThread(new ParsingVehicleDataThread(redisTemplate,vehicleData));
+                /**
+                 * 进行报文解析
+                 */
+                ThreadPool.exeThread(new ParsingVehicleMsgThread(redisTemplate,vehicleData));
             }
         }
-        log.info("结束消费kafka消息");
     }
 
 }

@@ -70,4 +70,27 @@ public class Config {
 	 * 车辆VIN正则表达式
 	 */
 	public final static String VIN_REGEX = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{17}$";
+
+
+	/**
+	 * 车辆基础故障组
+	 */
+	public final static String VEHICLE_BASE_FAULT = "vehicle_base";
+
+	/**
+	 * 车辆零配件故障组
+	 */
+	public final static String VEHICLE_PARTS_FAULT = "vehicle_parts";
+
+	/**
+	 * 车辆电池故障组
+	 */
+	public final static String VEHICLE_BATTERY_FAULT = "vehicle_battery";
+
+	/**
+	 * 车辆故障日志队列
+	 */
+	public final static String VEHICLE_FAULT_LOG = "vehicle_fault_log";
+
+
 }

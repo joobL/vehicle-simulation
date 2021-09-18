@@ -1,6 +1,7 @@
 package com.muyu.pojo;
 
 import com.muyu.annotations.KeyAnn;
+import com.muyu.common.Config;
 import com.muyu.utils.DateUtils;
 
 import java.text.SimpleDateFormat;
@@ -288,7 +289,7 @@ public class VehicleData {
     private String batteryMsg;
 
     public String getVehicleStatusMsg() {
-        StringBuilder vehicleStatusMsgSb = new StringBuilder("7X");
+        StringBuilder vehicleStatusMsgSb = new StringBuilder(Config.VEHICLE_BASE_FAULT + "7X");
         vehicleStatusMsgSb.append(" 0").append(vehicleStatus);
         vehicleStatusMsgSb.append(" 0").append(chargingStatus);
         vehicleStatusMsgSb.append(" 0").append(operatingStatus);
@@ -296,25 +297,25 @@ public class VehicleData {
         vehicleStatusMsgSb.append(" 0").append(chargingEnergyStorageStatus);
         vehicleStatusMsgSb.append(" 0").append(driveMotorStatus);
         vehicleStatusMsgSb.append(" 0").append(positionStatus);
-        vehicleStatusMsgSb.append("7X");
+        vehicleStatusMsgSb.append(" 7X");
         vehicleStatusMsg = vehicleStatusMsgSb.toString();
         return vehicleStatusMsg;
     }
 
     public String getSmartHardwareMsg() {
-        StringBuilder smartHardwareMsgSb = new StringBuilder("7X");
+        StringBuilder smartHardwareMsgSb = new StringBuilder(Config.VEHICLE_PARTS_FAULT + "7X");
         smartHardwareMsgSb.append(" 0").append(easStatus);
         smartHardwareMsgSb.append(" 0").append(ptcStatus);
         smartHardwareMsgSb.append(" 0").append(epsStatus);
         smartHardwareMsgSb.append(" 0").append(absStatus);
         smartHardwareMsgSb.append(" 0").append(mcuStatus);
-        smartHardwareMsgSb.append("7X");
+        smartHardwareMsgSb.append(" 7X");
         smartHardwareMsg = smartHardwareMsgSb.toString();
         return smartHardwareMsg;
     }
 
     public String getBatteryMsg() {
-        StringBuilder batteryMsgSb = new StringBuilder("7X");
+        StringBuilder batteryMsgSb = new StringBuilder(Config.VEHICLE_BATTERY_FAULT + "7X");
         batteryMsgSb.append(" 0").append(heatingStatus);
         batteryMsgSb.append(" 0").append(batteryStatus);
         batteryMsgSb.append(" 0").append(batteryInsulationStatus);
