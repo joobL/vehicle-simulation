@@ -92,5 +92,17 @@ public class Config {
 	 */
 	public final static String VEHICLE_FAULT_LOG = "vehicle_fault_log";
 
+	/**
+	 * 车辆绑定电子围栏
+	 */
+	public final static String VEHICLE_FENCE_BIND = "vehicle_fence_bind";
+	/**
+	 * 车辆电子围栏信息
+	 */
+	public final static String VEHICLE_FENCE_INFO = "vehicle_fence_INFO";
 
+	/**
+	 * 车辆电子围栏类型
+	 */
+	public final static String VEHICLE_FENCE_TYPE = "vehicle_fence_type";
 }
