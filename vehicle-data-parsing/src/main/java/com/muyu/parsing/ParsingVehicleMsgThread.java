@@ -1,26 +1,18 @@
 package com.muyu.parsing;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.muyu.annotations.KeyAnn;
 import com.muyu.common.Config;
+import com.muyu.mapper.VehicleDataMapper;
 import com.muyu.pojo.VehicleData;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.ListOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.SetOperations;
+import org.springframework.data.redis.core.*;
 
 import java.awt.geom.Point2D;
-import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author 牧鱼
@@ -36,9 +28,12 @@ public class ParsingVehicleMsgThread implements Runnable{
 
     private final VehicleData vehicleData;
 
-    public ParsingVehicleMsgThread(RedisTemplate<String, ? extends Object> redisTemplate, VehicleData vehicleData) {
+    private final VehicleDataMapper vehicleDataMapper;
+
+    public ParsingVehicleMsgThread(RedisTemplate<String, ? extends Object> redisTemplate, VehicleData vehicleData, VehicleDataMapper vehicleDataMapper) {
         this.redisTemplate = redisTemplate;
         this.vehicleData = vehicleData;
+        this.vehicleDataMapper = vehicleDataMapper;
     }
 
 
@@ -62,6 +57,14 @@ public class ParsingVehicleMsgThread implements Runnable{
         parsingVehicleStatusMsg(vehicleStatusMsg);
         parsingVehiclePartsMsg(smartHardwareMsg);
         parsingVehicleBatteryMsg(batteryMsg);
+        // 实时刷新车辆定位
+        String latitude = vehicleData.getLatitude();
+        String longitude = vehicleData.getLongitude();
+        if (StringUtils.isNotEmpty(latitude) && StringUtils.isNotEmpty(longitude)){
+            ValueOperations<String, String> strOperations = (ValueOperations<String, String>) redisTemplate.opsForValue();
+            strOperations.set(Config.VEHICLE_CURRENT_LOCATION + vehicleData.getVin() , longitude + "," + latitude);
+            vehicleDataMapper.updateVehicleData();
+        }
     }
 
     private void parsingVehicleFence() {

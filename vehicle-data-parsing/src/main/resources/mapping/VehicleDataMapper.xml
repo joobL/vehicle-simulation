@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muyu.mapper.VehicleDataMapper">
+
+
+    <update id="updateVehicleData">
+        UPDATE `vehicle-service`.t_vehicle_data_info
+        SET
+            sum_mileage = sum_mileage + 0.31,
+            month_mileage = month_mileage + 0.31,
+            week_mileage = week_mileage + 0.31,
+            day_mileage = day_mileage + 0.31
+        WHERE id = 1;
+    </update>
+</mapper>

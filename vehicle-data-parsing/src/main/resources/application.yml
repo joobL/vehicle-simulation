@@ -5,3 +5,12 @@ hbase:
     confMaps:
       'hbase.zookeeper.quorum' : 'hbase'
       'hbase.zookeeper.property.clientPort' : '2181'
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3386/vehicle_data_production?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.muyu.pojo

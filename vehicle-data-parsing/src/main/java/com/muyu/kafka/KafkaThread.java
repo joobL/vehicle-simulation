@@ -3,6 +3,7 @@ package com.muyu.kafka;
 import com.alibaba.fastjson.JSONObject;
 import com.muyu.common.Config;
 import com.muyu.hbase.service.HbaseDataService;
+import com.muyu.mapper.VehicleDataMapper;
 import com.muyu.parsing.ParsingVehicleDataThread;
 import com.muyu.parsing.ParsingVehicleMsgThread;
 import com.muyu.pojo.VehicleData;
@@ -30,11 +31,13 @@ public class KafkaThread implements Runnable{
     private final KafkaConsumer<String, String> kafkaConsumer;
     private final HbaseDataService hbaseDataService;
     private final RedisTemplate<String , ? extends Object> redisTemplate;
+    private final VehicleDataMapper vehicleDataMapper;
 
-    public KafkaThread(KafkaConsumer<String, String> kafkaConsumer, HbaseDataService hbaseDataService, RedisTemplate<String, ?> redisTemplate) {
+    public KafkaThread(KafkaConsumer<String, String> kafkaConsumer, HbaseDataService hbaseDataService, RedisTemplate<String, ?> redisTemplate, VehicleDataMapper vehicleDataMapper) {
         this.kafkaConsumer = kafkaConsumer;
         this.hbaseDataService = hbaseDataService;
         this.redisTemplate = redisTemplate;
+        this.vehicleDataMapper = vehicleDataMapper;
     }
 
 
@@ -62,9 +65,9 @@ public class KafkaThread implements Runnable{
                  */
                 ThreadPool.exeThread(new ParsingVehicleDataThread(redisTemplate,vehicleData));
                 /**
-                 * 进行报文解析
+                 * 进行报文解析 定位更新
                  */
-                ThreadPool.exeThread(new ParsingVehicleMsgThread(redisTemplate,vehicleData));
+                ThreadPool.exeThread(new ParsingVehicleMsgThread(redisTemplate,vehicleData, vehicleDataMapper));
             }
         }
     }

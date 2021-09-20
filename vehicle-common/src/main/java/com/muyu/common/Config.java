@@ -110,4 +110,9 @@ public class Config {
 	 * 车辆历史轨迹查询
 	 */
 	public final static String VEHICLE_HISTORY_LOCUS = "vehicle_history_locus:";
+
+	/**
+	 * 车辆当前定位
+	 */
+	public final static String VEHICLE_CURRENT_LOCATION = "VEHICLE_CURRENT_LOCATION:";
 }

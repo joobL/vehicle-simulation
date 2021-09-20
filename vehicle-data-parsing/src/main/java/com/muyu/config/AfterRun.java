@@ -2,6 +2,7 @@ package com.muyu.config;
 
 import com.muyu.hbase.service.HbaseDataService;
 import com.muyu.kafka.KafkaThread;
+import com.muyu.mapper.VehicleDataMapper;
 import com.muyu.pool.ThreadPool;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.springframework.boot.ApplicationArguments;
@@ -26,14 +27,17 @@ public class AfterRun implements ApplicationRunner {
 
     private final RedisTemplate<String,? extends Object> redisTemplate;
 
-    public AfterRun(KafkaConsumer<String, String> kafkaConsumer, HbaseDataService hbaseDataService, RedisTemplate<String, ? extends Object> redisTemplate) {
+    private final VehicleDataMapper vehicleDataMapper;
+
+    public AfterRun(KafkaConsumer<String, String> kafkaConsumer, HbaseDataService hbaseDataService, RedisTemplate<String, ? extends Object> redisTemplate, VehicleDataMapper vehicleDataMapper) {
         this.kafkaConsumer = kafkaConsumer;
         this.hbaseDataService = hbaseDataService;
         this.redisTemplate = redisTemplate;
+        this.vehicleDataMapper = vehicleDataMapper;
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        ThreadPool.scheduleAtFixedRate(new KafkaThread(kafkaConsumer,hbaseDataService,redisTemplate) , 0,1, TimeUnit.SECONDS);
+        ThreadPool.scheduleAtFixedRate(new KafkaThread(kafkaConsumer,hbaseDataService,redisTemplate, vehicleDataMapper) , 0,1, TimeUnit.SECONDS);
     }
 }
