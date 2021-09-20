@@ -782,8 +782,11 @@ public class VehicleData {
 
     public Map<String, String> getBaseData() {
         Map<String, String> dataBaseMap = new HashMap<>();
+
         dataBaseMap.put("vin",vin);
         dataBaseMap.put("drivingRoute",drivingRoute);
+        dataBaseMap.put("longitude",longitude);
+        dataBaseMap.put("latitude",latitude);
         dataBaseMap.put("speed",speed);
         dataBaseMap.put("mileage",mileage);
         dataBaseMap.put("voltage",voltage);
@@ -799,6 +802,17 @@ public class VehicleData {
         dataBaseMap.put("motorTemperature",motorTemperature);
         dataBaseMap.put("motorVoltage",motorVoltage);
         dataBaseMap.put("motorCurrent",motorCurrent);
+        dataBaseMap.put("remainingBattery",remainingBattery);
+        dataBaseMap.put("maximumFeedbackPower",maximumFeedbackPower);
+        dataBaseMap.put("maximumDischargePower",maximumDischargePower);
+        dataBaseMap.put("selfCheckCounter",selfCheckCounter);
+        dataBaseMap.put("totalBatteryCurrent",totalBatteryCurrent);
+        dataBaseMap.put("totalBatteryVoltage",totalBatteryVoltage);
+        dataBaseMap.put("singleBatteryMinVoltage",singleBatteryMinVoltage);
+        dataBaseMap.put("singleBatteryMaxVoltage",singleBatteryMaxVoltage);
+        dataBaseMap.put("singleBatteryMaxTemperature",singleBatteryMaxTemperature);
+        dataBaseMap.put("singleBatteryMinTemperature",singleBatteryMinTemperature);
+        dataBaseMap.put("availableBatteryCapacity",availableBatteryCapacity);
         return dataBaseMap;
     }
 }

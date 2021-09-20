@@ -296,15 +296,17 @@ public class HbaseDataService {
     /**
      * 全表扫描-过滤器
      * @param tableName
-     * @param filter
+     * @param filters
      * @return
      * @throws IOException
      */
-    public ResultScanner scan(String tableName, Filter filter) throws IOException {
+    public ResultScanner scan(String tableName, Filter... filters) throws IOException {
 
         Table table = conn.getTable(TableName.valueOf(tableName));
         Scan scan = new Scan();
-        scan.setFilter(filter);
+        for (Filter filter : filters) {
+            scan.setFilter(filter);
+        }
         ResultScanner scanner = table.getScanner(scan);
 
         return scanner;

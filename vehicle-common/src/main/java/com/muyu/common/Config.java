@@ -105,4 +105,9 @@ public class Config {
 	 * 车辆电子围栏类型
 	 */
 	public final static String VEHICLE_FENCE_TYPE = "vehicle_fence_type";
+
+	/**
+	 * 车辆历史轨迹查询
+	 */
+	public final static String VEHICLE_HISTORY_LOCUS = "vehicle_history_locus:";
 }

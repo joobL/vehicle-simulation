@@ -72,7 +72,7 @@ public class ParsingVehicleDataThread implements Runnable{
                     try {
                         field.setAccessible(true);
                         Object invoke = field.get(vehicleData);
-                        dataMap.put(key,invoke.toString() + unit);
+                        dataMap.put(key,invoke != null ? (invoke.toString() + unit) : "-");
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
                     }
@@ -83,5 +83,7 @@ public class ParsingVehicleDataThread implements Runnable{
         }
         return dataMap;
     }
-
+    public static Map<String,String> getVehicleData(VehicleData vehicleData){
+        return new ParsingVehicleDataThread(null , vehicleData).getVehicleData();
+    }
 }
