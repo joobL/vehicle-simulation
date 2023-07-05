@@ -1,0 +1,20 @@
+server:
+  port: 10003
+
+#    freemarker静态资源配置
+spring:
+  freemarker:
+    suffix: .ftlh
+    cache: false
+    charset: UTF-8
+    content-type: text/html
+    expose-request-attributes: true
+    expose-session-attributes: true
+    request-context-attribute: request
+  mvc:
+    static-path-pattern: /static/**
+  redis:
+    host: 127.0.0.1
+    port: 6379
+netty:
+  port: 8564
